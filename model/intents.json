@@ -1,0 +1,17 @@
+[
+  {
+    "tag": "Greeting",
+    "patterns": ["hello", "hi", "hey", "hi joonka"]
+  },
+  {
+    "tag": "Loan",
+    "patterns": [
+      "loan",
+      "i need 1000 euro to renovate my home",
+      "i need 2000 euros now",
+      "i need 5000 euros",
+      "i want a loan",
+      "can you give me a loan?"
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+service: chatbot
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: eu-west-1
+  stage: dev
+
+functions:
+  infer:
+    handler: infer.inferHandler
+    timeout: 30
+    events:
+      - http:
+          path: infer
+          method: post
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    zip: true
+    slim: true
+    noDeploy:
+      - boto3
+      - botocore
+      - docutils
+      - jmespath
+      - pip
+      - python-dateutil
+      - s3transfer
+      - setuptools
+      - six
+      - tensorboard
+
+plugins:
+  - serverless-python-requirements
