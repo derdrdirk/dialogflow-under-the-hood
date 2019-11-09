@@ -29,8 +29,8 @@ custom:
       - python-dateutil
       - s3transfer
       - setuptools
-      - six
       - tensorboard
+      - six
 
 plugins:
   - serverless-python-requirements
