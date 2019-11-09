@@ -1,5 +1,32 @@
 .home {
-	padding: 56px 20px;
-	min-height: 100%;
-	width: 100%;
+  padding: 56px 20px;
+  min-height: 100%;
+  width: 100%;
+}
+
+.chat {
+  font-size: 1.2em;
+}
+.leftMsg {
+  float: left;
+  color: red;
+}
+.rightMsg {
+  float: right;
+  color: green;
+}
+.clear {
+  clear: both;
+}
+
+.footer {
+  display: flex;
+}
+.footer input {
+  flex: 1;
+  font-size: 1.2em;
+}
+.footer button {
+  width: 20%;
+  font-size: 1.2em;
 }
