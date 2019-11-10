@@ -11,7 +11,7 @@ import numpy as np
 
 # Hyperparameters
 oov_tok = "<OOV>"
-num_epochs = 15
+num_epochs = 30
 
 # Load Intents
 with open("./intents.json", "r") as f:
@@ -41,7 +41,10 @@ model = tf.keras.Sequential(
     [
         layers.Embedding(vocab_size + 1, 16, input_length=padded_length),
         layers.Flatten(),
-        layers.Dense(6, activation="relu"),
+        layers.Dense(128, activation="relu"),
+        layers.Dropout(0.5),
+        layers.Dense(64, activation="relu"),
+        layers.Dropout(0.5),
         layers.Dense(num_categories, activation="softmax"),
     ]
 )
@@ -60,6 +63,7 @@ def inferHandler(event, context):
     sequence = tokenizer.texts_to_sequences([sentence])
     padded_sequence = pad_sequences(sequence, maxlen=padded_length)
     prediction = model.predict(padded_sequence)[0]
+    print(sentence, prediction)
     intent = intents[np.argmax(prediction)]
     tag = intent["tag"]
 

@@ -1,6 +1,6 @@
 import { h, Fragment } from "preact";
 import style from "./style";
-import { useState } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
 import axios from "axios";
 
 const initMessages = [
@@ -17,6 +17,9 @@ const initMessages = [
 const Home = () => {
   const [messages, setMessages] = useState(initMessages);
   const [input, setInput] = useState("");
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  }, [messages]);
 
   const sendMsg = () => {
     if (input == "") return;
@@ -27,7 +30,7 @@ const Home = () => {
     axios
       .post(
         "https://2kicnr8868.execute-api.eu-west-1.amazonaws.com/dev/infer",
-        { msg: "hello" }
+        { msg: input }
       )
       .then(({ data: { intent } }) => {
         setMessages([

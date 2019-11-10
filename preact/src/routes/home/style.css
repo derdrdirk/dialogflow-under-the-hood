@@ -6,6 +6,7 @@
 
 .chat {
   font-size: 1.2em;
+  margin-bottom: 20px;
 }
 .leftMsg {
   float: left;
@@ -34,6 +35,7 @@
   right: 0;
   left: 0;
   padding: 20px;
+  background-color: #eee2dc;
 }
 .footer input {
   flex: 1;
