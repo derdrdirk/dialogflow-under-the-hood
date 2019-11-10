@@ -1,5 +1,5 @@
 import { h, Fragment } from "preact";
-import style from "./style";
+import style from "./style.css";
 import { useState, useEffect } from "preact/hooks";
 import axios from "axios";
 
@@ -17,6 +17,10 @@ const initMessages = [
 const Home = () => {
   const [messages, setMessages] = useState(initMessages);
   const [input, setInput] = useState("");
+
+  const [count, setCount] = useState(1);
+  const increment = () => setCount(count + 1);
+
   useEffect(() => {
     window.scrollTo(0, document.body.scrollHeight);
   }, [messages]);
@@ -62,9 +66,11 @@ const Home = () => {
           </Fragment>
         ))}
       </main>
+      <div> Current value: {count}</div>
+      <button onClick={increment}>Increment</button>
       <footer class={style.footer}>
         <input type="text" value={input} onKeyDown={handleKeyDown} />
-        <button onClick={() => sendMsg()}>Senden</button>
+        <button onClick={sendMsg}>Senden</button>
       </footer>
     </div>
   );
