@@ -65,6 +65,10 @@ def inferHandler(event, context):
 
     body["intent"] = tag
 
-    response = {"statusCode": 200, "body": json.dumps(body)}
+    response = {
+        "statusCode": 200,
+        "headers": {"Access-Control-Allow-Origin": "*"},
+        "body": json.dumps(body),
+    }
 
     return response

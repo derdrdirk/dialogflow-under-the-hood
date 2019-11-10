@@ -1,6 +1,7 @@
 import { h, Fragment } from "preact";
 import style from "./style";
 import { useState } from "preact/hooks";
+import axios from "axios";
 
 const initMessages = [
   {
@@ -19,8 +20,30 @@ const Home = () => {
 
   const sendMsg = () => {
     if (input == "") return;
+
     setInput("");
     setMessages([...messages, { isUser: true, msg: input }]);
+
+    axios
+      .post(
+        "https://2kicnr8868.execute-api.eu-west-1.amazonaws.com/dev/infer",
+        { msg: "hello" }
+      )
+      .then(({ data: { intent } }) => {
+        setMessages([
+          ...messages,
+          { isUser: true, msg: input },
+          { isUser: false, msg: intent }
+        ]);
+      })
+      .catch(err => console.error(err));
+  };
+  const handleKeyDown = e => {
+    e.preventDefault();
+    if (e.key === "Enter") sendMsg();
+    else if (/^ $|^[0-9a-z]$/i.test(e.key))
+      // is space or alphanumeric
+      setInput(input + e.key);
   };
 
   return (
@@ -37,11 +60,7 @@ const Home = () => {
         ))}
       </main>
       <footer class={style.footer}>
-        <input
-          type="text"
-          value={input}
-          onChange={e => setInput(e.target.value)}
-        />
+        <input type="text" value={input} onKeyDown={handleKeyDown} />
         <button onClick={() => sendMsg()}>Senden</button>
       </footer>
     </div>

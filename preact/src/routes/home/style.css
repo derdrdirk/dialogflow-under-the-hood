@@ -9,11 +9,19 @@
 }
 .leftMsg {
   float: left;
-  color: red;
+  background-color: white;
+  border-radius: 1.1em;
+  padding: 8px 10px;
+  margin: 3px 0;
+  max-width: 80%;
 }
 .rightMsg {
   float: right;
-  color: green;
+  background-color: #edc7b7;
+  border-radius: 1.1em;
+  padding: 8px 10px;
+  margin: 3px 0;
+  max-width: 80%;
 }
 .clear {
   clear: both;
@@ -21,12 +29,25 @@
 
 .footer {
   display: flex;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 20px;
 }
 .footer input {
   flex: 1;
   font-size: 1.2em;
+  margin-right: 20px;
+  background-color: #edc7b7;
+  padding: 6px 20px;
+  border-radius: 1.1em;
+  border-width: 0;
 }
 .footer button {
-  width: 20%;
   font-size: 1.2em;
+  padding: 6px 30px;
+  border-radius: 1.1em;
+  background-color: #ac3b61;
+  color: white;
 }
