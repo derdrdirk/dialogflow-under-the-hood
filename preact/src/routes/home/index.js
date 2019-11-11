@@ -43,24 +43,13 @@ const Home = () => {
       .catch(err => console.error(err));
   };
   const handleKeyDown = e => {
-    e.preventDefault(); // axios
-    //   .post(
-    //     "https://2kicnr8868.execute-api.eu-west-1.amazonaws.com/dev/infer",
-    //     { msg: input }
-    //   )
-    //   .then(({ data: { intent } }) => {
-    //     setMessages([
-    //       ...messages,
-    //       { isUser: true, msg: input },
-    //       { isUser: false, msg: intent }
-    //     ]);
-    //   })
-    //   .catch(err => console.error(err));
-
+    e.preventDefault();
+    console.log(e.key);
     if (e.key === "Enter") sendMsg();
     else if (/^ $|^[0-9a-z]$/i.test(e.key))
       // is space or alphanumeric
       setInput(input + e.key);
+    else if (e.key === "Backspace") setInput(input.slice(0, -1));
   };
 
   return (
