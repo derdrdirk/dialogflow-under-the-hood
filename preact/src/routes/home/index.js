@@ -18,9 +18,6 @@ const Home = () => {
   const [messages, setMessages] = useState(initMessages);
   const [input, setInput] = useState("");
 
-  const [count, setCount] = useState(1);
-  const increment = () => setCount(count + 1);
-
   useEffect(() => {
     window.scrollTo(0, document.body.scrollHeight);
   }, [messages]);
@@ -46,7 +43,20 @@ const Home = () => {
       .catch(err => console.error(err));
   };
   const handleKeyDown = e => {
-    e.preventDefault();
+    e.preventDefault(); // axios
+    //   .post(
+    //     "https://2kicnr8868.execute-api.eu-west-1.amazonaws.com/dev/infer",
+    //     { msg: input }
+    //   )
+    //   .then(({ data: { intent } }) => {
+    //     setMessages([
+    //       ...messages,
+    //       { isUser: true, msg: input },
+    //       { isUser: false, msg: intent }
+    //     ]);
+    //   })
+    //   .catch(err => console.error(err));
+
     if (e.key === "Enter") sendMsg();
     else if (/^ $|^[0-9a-z]$/i.test(e.key))
       // is space or alphanumeric
@@ -66,8 +76,6 @@ const Home = () => {
           </Fragment>
         ))}
       </main>
-      <div> Current value: {count}</div>
-      <button onClick={increment}>Increment</button>
       <footer class={style.footer}>
         <input type="text" value={input} onKeyDown={handleKeyDown} />
         <button onClick={sendMsg}>Senden</button>

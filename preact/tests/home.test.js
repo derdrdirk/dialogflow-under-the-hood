@@ -1,10 +1,16 @@
 import { h } from "preact";
-import jest from "jest";
+import MockAdapter from "axios-mock-adapter";
 import Home from "../src/routes/home";
 import { shallow, mount } from "./enzyme";
+import axios from "axios";
+
+// mock any axios post request
+const mock = new MockAdapter(axios);
+mock.onPost().reply(200, true);
 
 describe("Initial Test of Home", () => {
   window.scrollTo = () => {};
+  const preventDefault = () => {};
 
   test("Home renders headline", () => {
     const wrapper = shallow(<Home />);
@@ -21,24 +27,33 @@ describe("Initial Test of Home", () => {
     ).toBe("Hi! This is Joonka a demo of Natural Language Processing.");
   });
 
-  // test("Sends msg on send button click", () => {
-  //   const wrapper = mount(<Home />);
-  //   wrapper.find("input").simulate("keypress", { key: "h" });
-  //   wrapper
-  //     .find("button")
-  //     .at(1)
-  //     .simulate("click");
-  //   wrapper.update();
-  //   console.log(wrapper.text());
-  // });
-
-  test("test", () => {
+  test("Sends msg on send button click", done => {
     const wrapper = mount(<Home />);
-    wrapper
-      .find("button")
-      .first()
-      .simulate("click")
-      .simulate("click");
-    console.log(wrapper.text());
+    wrapper.find("input").simulate("keydown", { key: "a" });
+    wrapper.find("button").simulate("click");
+    setImmediate(() => {
+      expect(
+        wrapper
+          .find("main")
+          .childAt(4)
+          .text()
+      ).toBe("a");
+      done();
+    });
+  });
+
+  test("Sends msg on pressing enter", done => {
+    const wrapper = mount(<Home />);
+    wrapper.find("input").simulate("keydown", { key: "b" });
+    wrapper.find("input").simulate("keydown", { key: "Enter" });
+    setImmediate(() => {
+      expect(
+        wrapper
+          .find("main")
+          .childAt(4)
+          .text()
+      ).toBe("b");
+      done();
+    });
   });
 });
