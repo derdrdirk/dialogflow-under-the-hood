@@ -1,7 +1,34 @@
 [
   {
     "tag": "greeting",
-    "patterns": ["hello", "hi", "hey", "hi joonka"]
+    "patterns": ["hello", "hi", "hey", "hi joonka"],
+    "responses": ["Yo!", "Howdy!", "G'day mate!", "Hiya!"]
+  },
+  {
+    "tag": "account",
+    "patterns": [
+      "how much money do i have?",
+      "account status",
+      "account",
+      "financial status",
+      "status"
+    ],
+    "responses": ["You have 1100€ in your bank"]
+  },
+  {
+    "tag": "lastTransfer",
+    "patterns": ["last transfer", "what did i buy last", "last thing i bought"],
+    "responses": [
+      "You spend 3€ for a cafe yesterday afternoon.",
+      "You went to the movies for 7€."
+    ]
+  },
+  {
+    "tag": "overview",
+    "patterns": ["where did i spend money", "overview"],
+    "responses": [
+      "You spend 600€ in rent, 250€ for alimentation and 210€ for going out last month"
+    ]
   },
   {
     "tag": "loan",
@@ -12,6 +39,7 @@
       "i need 5000 euros",
       "i want a loan",
       "can you give me a loan?"
-    ]
+    ],
+    "responses": ["Sure. How about one from Deutsche Bank?"]
   }
 ]

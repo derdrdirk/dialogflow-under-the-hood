@@ -33,18 +33,17 @@ const Home = () => {
         "https://2kicnr8868.execute-api.eu-west-1.amazonaws.com/dev/infer",
         { msg: input }
       )
-      .then(({ data: { intent } }) => {
+      .then(({ data: { intent, response } }) => {
         setMessages([
           ...messages,
           { isUser: true, msg: input },
-          { isUser: false, msg: intent }
+          { isUser: false, msg: response }
         ]);
       })
       .catch(err => console.error(err));
   };
   const handleKeyDown = e => {
     e.preventDefault();
-    console.log(e.key);
     if (e.key === "Enter") sendMsg();
     else if (/^ $|^[0-9a-z]$/i.test(e.key))
       // is space or alphanumeric

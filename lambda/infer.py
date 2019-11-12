@@ -8,10 +8,12 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras import layers
 import numpy as np
+import random
 
 # Hyperparameters
 oov_tok = "<OOV>"
-num_epochs = 30
+num_epochs = 300
+threshold = 0.5
 
 # Load Intents
 with open("./intents.json", "r") as f:
@@ -64,10 +66,17 @@ def inferHandler(event, context):
     padded_sequence = pad_sequences(sequence, maxlen=padded_length)
     prediction = model.predict(padded_sequence)[0]
     print(sentence, prediction)
-    intent = intents[np.argmax(prediction)]
-    tag = intent["tag"]
 
-    body["intent"] = tag
+    # if none of the categories has a categories has a probability > threshold
+    # return default
+    if prediction[np.argmax(prediction)] < threshold:
+        body["intent"] = "default"
+        body["response"] = "Sry but I did not understand"
+    else:
+        intent = intents[np.argmax(prediction)]
+        tag = intent["tag"]
+        body["intent"] = tag
+        body["response"] = random.choice(intent["responses"])
 
     response = {
         "statusCode": 200,
